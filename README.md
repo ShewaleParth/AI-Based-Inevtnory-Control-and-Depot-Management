@@ -1,24 +1,26 @@
-# 🚀 AI-Powered Inventory Management System
+# 🚀 SANGRAHAK - AI-Powered Logistics & Inventory Management System
 
-> **Intelligent Stock Management with Real-Time Forecasting, Multi-Depot Tracking, and Supplier Risk Analysis**
+![System Architecture](https://img.shields.io/badge/Architecture-Full--Stack-blue)
+![Status](https://img.shields.io/badge/Status-Production--Ready-success)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-A comprehensive full-stack inventory management platform that leverages Machine Learning and AI to optimize stock levels, predict demand, manage multiple warehouses, and assess supplier reliability in real-time.
+**SANGRAHAK** is an intelligent, enterprise-grade logistics and inventory management platform that leverages AI/ML for demand forecasting, supplier risk assessment, and real-time inventory optimization across multiple depot locations.
 
 ---
 
 ## 📋 Table of Contents
 
 - [Features](#-features)
-- [Tech Stack](#-tech-stack)
 - [System Architecture](#-system-architecture)
+- [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
-- [Configuration](#-configuration)
 - [Running the Application](#-running-the-application)
 - [Project Structure](#-project-structure)
+- [Key Modules](#-key-modules)
 - [API Documentation](#-api-documentation)
-- [ML Models](#-ml-models)
-- [Screenshots](#-screenshots)
+- [Environment Variables](#-environment-variables)
+- [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -26,109 +28,85 @@ A comprehensive full-stack inventory management platform that leverages Machine 
 
 ## ✨ Features
 
-### 📊 Core Inventory Management
-- **Multi-Depot Support**: Manage inventory across multiple warehouses/depots
-- **Real-Time Stock Tracking**: Live updates on stock levels with WebSocket integration
-- **Product Management**: Complete CRUD operations with SKU generation
-- **Transaction History**: Track all stock movements (stock-in, stock-out, transfers)
-- **Bulk CSV Upload**: Import products and assign to depots via CSV
-- **Custom Product Images**: Upload and manage product images
+### 🎯 Core Capabilities
 
-### 🤖 AI & Machine Learning
-- **Demand Forecasting**: ARIMA-based 30-day sales predictions
-- **Stock Status Prediction**: XGBoost model for stock level classification
-- **Priority Prediction**: AI-driven reorder priority recommendations
-- **Supplier Risk Scoring**: ML-powered supplier reliability analysis
-- **Scenario Planning**: What-if analysis for demand changes
-- **AI Insights**: Automated recommendations for reorder points
+- **📊 Real-Time Dashboard**: Live KPIs, sales trends, and network alerts
+- **🏭 Multi-Depot Management**: Manage inventory across multiple warehouse locations
+- **🤖 AI-Powered Forecasting**: ARIMA-based demand prediction with 30-day forecasts
+- **⚠️ Intelligent Alerts**: Automated stock-out warnings and reorder recommendations
+- **📦 Inventory Overview**: Comprehensive product tracking with AI risk indicators
+- **🚚 Movement Transactions**: Complete audit trail of all stock movements
+- **📈 Advanced Reports**: Exportable analytics in PDF, Excel, and CSV formats
+- **🛡️ Supplier Risk Radar**: ML-based supplier performance and risk assessment
+- **🔍 Stock Search & Tracking**: Real-time product location and availability
 
-### 📈 Analytics & Reporting
-- **Interactive Dashboard**: Real-time KPIs and visualizations
-- **Inventory Overview**: Stock distribution across depots
-- **Transaction Analytics**: Daily trends and depot activity
-- **Low Stock Alerts**: Automated notifications for reorder points
-- **Custom Reports**: Generate PDF/Excel reports
-- **Forecast Visualization**: Interactive charts for demand predictions
+### 🧠 AI/ML Features
 
-### 🔔 Alerts & Notifications
-- **Email Notifications**: Automated alerts for critical stock levels
-- **Real-Time Alerts**: WebSocket-based instant notifications
-- **Custom Alert Rules**: Configure thresholds per product
-- **Alert History**: Track all past notifications
-
-### 🏢 Multi-User Support
-- **User Authentication**: JWT-based secure login
-- **Role-Based Access**: Admin and user roles
-- **User-Specific Data**: Isolated inventory per user account
-- **Session Management**: Secure token-based sessions
+- **Demand Forecasting**: ARIMA time-series models for accurate sales predictions
+- **Stock-Out Prediction**: Days-to-empty calculations with confidence intervals
+- **Risk Scoring**: Multi-factor supplier risk assessment (delay, quality, fulfillment)
+- **Reorder Optimization**: Intelligent reorder quantity recommendations
+- **Anomaly Detection**: Automated identification of unusual inventory patterns
 
 ---
 
-## 🛠 Tech Stack
-
-### Frontend
-- **React 19** - Modern UI library
-- **Vite** - Fast build tool
-- **React Router v7** - Client-side routing
-- **Recharts** - Data visualization
-- **Lucide React** - Icon library
-- **Framer Motion** - Animations
-- **Axios** - HTTP client
-
-### Backend (Node.js)
-- **Express 5** - Web framework
-- **MongoDB** - NoSQL database (Mongoose ODM)
-- **Socket.IO** - Real-time WebSocket communication
-- **Redis (Upstash)** - Caching and session management
-- **JWT** - Authentication
-- **Nodemailer** - Email notifications
-- **Bull** - Background job queue
-- **ExcelJS & PDFKit** - Report generation
-
-### AI/ML Services (Python)
-- **Flask** - Python web framework
-- **XGBoost** - Gradient boosting for classification
-- **ARIMA (statsmodels)** - Time series forecasting
-- **Scikit-learn** - ML preprocessing and utilities
-- **Pandas & NumPy** - Data manipulation
-- **PyMongo** - MongoDB integration
-- **Groq API** - AI-powered insights
-
-### DevOps & Tools
-- **Git** - Version control
-- **PowerShell** - Automation scripts
-- **dotenv** - Environment management
-
----
-
-## 🏗 System Architecture
+## 🏗️ System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                         Frontend (React)                     │
-│                    http://localhost:5173                     │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-                     ├──────────────────────────────────────┐
-                     │                                      │
-┌────────────────────▼──────────────┐   ┌─────────────────▼──────────────┐
-│   Node.js Backend (Express)       │   │  Python AI Service (Flask)     │
-│   http://localhost:5000           │   │  http://localhost:5001         │
-│                                   │   │                                │
-│  • REST API                       │   │  • Demand Forecasting (ARIMA)  │
-│  • Authentication (JWT)           │   │  • Stock Prediction (XGBoost)  │
-│  • WebSocket (Socket.IO)          │   │  • Supplier Risk Scoring       │
-│  • Email Notifications            │   │  • Scenario Planning           │
-│  • Report Generation              │   │  • AI Insights (Groq)          │
-└────────────────────┬──────────────┘   └─────────────────┬──────────────┘
-                     │                                    │
-                     ├────────────────────────────────────┤
-                     │                                    │
-         ┌───────────▼──────────┐           ┌────────────▼────────────┐
-         │   MongoDB Atlas      │           │   Redis (Upstash)       │
-         │   (Database)         │           │   (Cache & Queue)       │
-         └──────────────────────┘           └─────────────────────────┘
+│                     FRONTEND (React + Vite)                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │  Dashboard   │  │  Inventory   │  │  Risk Radar  │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘     │
+└─────────────────────────────────────────────────────────────┘
+                            ↕ REST API
+┌─────────────────────────────────────────────────────────────┐
+│              BACKEND LAYER (Node.js + Python)               │
+│  ┌──────────────────────┐  ┌──────────────────────┐        │
+│  │  Express.js Server   │  │  Flask ML API        │        │
+│  │  - Auth & Routes     │  │  - Forecasting       │        │
+│  │  - Business Logic    │  │  - Risk Scoring      │        │
+│  └──────────────────────┘  └──────────────────────┘        │
+└─────────────────────────────────────────────────────────────┘
+                            ↕
+┌─────────────────────────────────────────────────────────────┐
+│                    DATA LAYER (MongoDB)                     │
+│  Products | Depots | Transactions | Forecasts | Alerts     │
+└─────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework**: React 19.2 + Vite 7.3
+- **UI Components**: Lucide React (icons), Framer Motion (animations)
+- **Charts**: Recharts 3.6
+- **HTTP Client**: Axios 1.13
+- **Routing**: React Router DOM 7.11
+
+### Backend (Node.js)
+- **Runtime**: Node.js
+- **Framework**: Express.js 5.2
+- **Database**: MongoDB (Mongoose 8.20)
+- **Authentication**: JWT (jsonwebtoken 9.0)
+- **Security**: Helmet, CORS, bcryptjs
+- **Email**: Nodemailer 7.0
+- **File Processing**: ExcelJS, PDFKit, CSV-Writer
+
+### Backend (Python ML)
+- **Framework**: Flask 3.1
+- **ML Libraries**: 
+  - XGBoost 3.0 (classification)
+  - Scikit-learn 1.6 (preprocessing, models)
+  - Statsmodels 0.14 (ARIMA forecasting)
+- **Data Processing**: Pandas 2.2, NumPy 2.1
+- **Database**: PyMongo 4.15
+
+### Database
+- **Primary**: MongoDB Atlas (Cloud)
+- **Caching**: Redis (optional)
 
 ---
 
@@ -136,11 +114,11 @@ A comprehensive full-stack inventory management platform that leverages Machine 
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
-- **Python** (v3.9 or higher) - [Download](https://www.python.org/)
-- **MongoDB Atlas Account** - [Sign Up](https://www.mongodb.com/cloud/atlas)
-- **Redis (Upstash) Account** - [Sign Up](https://upstash.com/)
-- **Git** - [Download](https://git-scm.com/)
+- **Node.js** (v18.x or higher)
+- **Python** (v3.11 or higher)
+- **MongoDB** (Atlas account or local instance)
+- **Git**
+- **npm** or **yarn**
 
 ---
 
@@ -149,523 +127,313 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/inventory-management-system.git
-cd inventory-management-system
+git clone https://github.com/ShewaleParth/MajorProject.git
+cd MajorProject
 ```
 
-### 2. Install Backend Dependencies
+### 2. Install Frontend Dependencies
 
 ```bash
-cd Backend/server
+cd Frontend
 npm install
 ```
 
-### 3. Install Frontend Dependencies
+### 3. Install Backend (Node.js) Dependencies
 
 ```bash
-cd ../../Frontend
+cd ../Backend/server
 npm install
 ```
 
 ### 4. Install Python Dependencies
 
 ```bash
-cd ../Backend/code
+cd ../..
 pip install -r requirements.txt
 ```
 
----
+### 5. Set Up Environment Variables
 
-## ⚙️ Configuration
-
-### 1. Backend Environment Variables
-
-Create a `.env` file in `Backend/server/`:
+Create a `.env` file in the root directory and `Backend/server/` directory:
 
 ```env
 # MongoDB Configuration
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/sangrahak?retryWrites=true&w=majority
 
-# JWT Configuration
-JWT_SECRET=your-super-secret-jwt-key-change-this
-JWT_EXPIRES_IN=7d
+# JWT Secret
+JWT_SECRET=your_super_secret_jwt_key_here
 
-# Redis Configuration (Upstash)
-REDIS_HOST=your-redis-host.upstash.io
-REDIS_PORT=6379
-REDIS_PASSWORD=your-redis-password
-UPSTASH_REDIS_REST_URL=https://your-redis-host.upstash.io
-UPSTASH_REDIS_REST_TOKEN=your-upstash-token
+# Email Configuration (Optional)
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
 
-# Email Configuration (Gmail)
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-app-specific-password
+# Redis Configuration (Optional)
+REDIS_URL=redis://localhost:6379
 
-# Groq API (for AI insights)
-GROQ_API_KEY=your-groq-api-key
-
-# Server Configuration
-PORT=5000
-NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
-
-# Reports Directory
-REPORTS_DIR=./reports
+# API Ports
+NODE_PORT=3000
+PYTHON_PORT=5001
 ```
 
-### 2. Python Environment Variables
+### 6. Train ML Models (Required for Risk Radar)
 
-The Python service uses the same `.env` file from `Backend/server/.env`.
-
-### 3. Frontend Configuration
-
-Update API endpoints in `Frontend/src/utils/api.js` if needed:
-
-```javascript
-const API_BASE_URL = 'http://localhost:5000/api';
-const AI_API_BASE_URL = 'http://localhost:5001/api';
+```bash
+cd Backend/supplier_intelligence
+python train_all_models.py
 ```
+
+This will create three ML model files:
+- `delay_risk_model.pkl`
+- `quality_risk_model.pkl`
+- `fulfillment_risk_model.pkl`
 
 ---
 
-## 🏃 Running the Application
+## ▶️ Running the Application
 
-### Option 1: Start All Services (Recommended)
+### Option 1: Run All Services (Recommended)
 
-Use the PowerShell script to start all services at once:
+From the project root directory:
 
-```powershell
-# From the root directory
+```bash
+# Windows
 .\start-all.ps1
+
+# Linux/Mac
+./start-all.sh
 ```
 
-This will start:
-- Python AI Service (Port 5001)
-- Node.js Backend (Port 5000)
-- React Frontend (Port 5173)
+### Option 2: Run Services Individually
 
-### Option 2: Start Services Individually
-
-#### 1. Start Python AI Service
-
-```bash
-cd Backend/code
-python app.py
-```
-
-**Expected Output:**
-```
-✓ Connected to MongoDB Database: your-db-name
-✓ Loaded ML model from JSON
-✓ Loaded label encoders
- * Running on http://127.0.0.1:5001
-```
-
-#### 2. Start Node.js Backend
-
-```bash
-cd Backend/server
-npm start
-```
-
-**Expected Output:**
-```
-🚀 Server running on port 5000
-🔍 Health check: http://localhost:5000/api/health
-📡 API Base URL: http://localhost:5000/api
-🌍 Environment: development
-```
-
-#### 3. Start React Frontend
-
+**Terminal 1 - Frontend:**
 ```bash
 cd Frontend
 npm run dev
 ```
+Frontend will run on: `http://localhost:5173`
 
-**Expected Output:**
+**Terminal 2 - Node.js Backend:**
+```bash
+cd Backend/server
+node server.js
 ```
-  VITE v7.3.1  ready in 500 ms
+Backend will run on: `http://localhost:3000`
 
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
+**Terminal 3 - Python ML API:**
+```bash
+cd Backend/code
+python app.py
 ```
-
-### Access the Application
-
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:5000/api
-- **AI Service**: http://localhost:5001/api
-- **Health Check**: http://localhost:5000/api/health
+ML API will run on: `http://localhost:5001`
 
 ---
 
 ## 📁 Project Structure
 
 ```
-inventory-management-system/
-├── Backend/
-│   ├── code/                          # Python AI Service
-│   │   ├── app.py                     # Flask server (forecasting)
-│   │   ├── Predicting.py              # Prediction logic
-│   │   ├── ai_assistant.py            # AI insights
-│   │   ├── requirements.txt           # Python dependencies
-│   │   └── start-ai.ps1               # AI service startup
-│   │
-│   ├── server/                        # Node.js Backend
-│   │   ├── config/                    # Configuration files
-│   │   │   ├── database.js            # MongoDB connection
-│   │   │   ├── redis.js               # Redis connection
-│   │   │   └── env.js                 # Environment validation
-│   │   ├── middleware/                # Express middleware
-│   │   │   ├── auth.js                # JWT authentication
-│   │   │   └── errorHandler.js        # Error handling
-│   │   ├── models/                    # Mongoose schemas
-│   │   │   ├── User.js
-│   │   │   ├── Product.js
-│   │   │   ├── Depot.js
-│   │   │   ├── Transaction.js
-│   │   │   ├── Forecast.js
-│   │   │   ├── Alert.js
-│   │   │   └── Report.js
-│   │   ├── routes/                    # API routes
-│   │   │   ├── auth.js                # Authentication
-│   │   │   ├── products.js            # Product management
-│   │   │   ├── depots.js              # Depot management
-│   │   │   ├── transactions.js        # Stock movements
-│   │   │   ├── forecasts.js           # Forecast data
-│   │   │   ├── dashboard.js           # Dashboard metrics
-│   │   │   ├── reports.js             # Report generation
-│   │   │   └── alert.js               # Alert management
-│   │   ├── services/                  # Business logic
-│   │   │   └── emailService.js        # Email notifications
-│   │   ├── utils/                     # Utility functions
-│   │   │   ├── skuGenerator.js
-│   │   │   ├── alertHelpers.js
-│   │   │   └── websocket.js
-│   │   ├── server.js                  # Main server file
-│   │   ├── package.json
-│   │   └── .env
-│   │
-│   └── supplier_intelligence/         # ML Models
-│       ├── models/                    # Trained models
-│       ├── risk_score_engine.py       # Risk scoring
-│       ├── supplier_routes.py         # Supplier API
-│       ├── train_delay_risk.py
-│       ├── train_fulfilment_risk.py
-│       └── train_quality_risk.py
-│
-├── Frontend/                          # React Application
+MajorProject/
+├── Frontend/                    # React frontend application
 │   ├── src/
-│   │   ├── components/                # Reusable components
-│   │   │   ├── AddTransactionModal.jsx
-│   │   │   ├── MetricCard.jsx
-│   │   │   ├── Navbar.jsx
-│   │   │   └── SupplierRiskRadar/
-│   │   ├── pages/                     # Page components
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Inventory.jsx
-│   │   │   ├── MovementTransactions.jsx
-│   │   │   ├── Forecasting.jsx
-│   │   │   ├── SupplierRisk.jsx
-│   │   │   ├── Reports.jsx
-│   │   │   ├── Alerts.jsx
-│   │   │   ├── Depots.jsx
-│   │   │   ├── Login.jsx
-│   │   │   └── Register.jsx
-│   │   ├── hooks/                     # Custom React hooks
-│   │   │   ├── useDashboardData.js
-│   │   │   └── useInventoryData.js
-│   │   ├── context/                   # React context
-│   │   │   └── AuthContext.jsx
-│   │   ├── utils/                     # Utility functions
-│   │   │   └── api.js                 # API client
-│   │   ├── styles/                    # Component styles
-│   │   ├── App.jsx                    # Main app component
-│   │   ├── main.jsx                   # Entry point
-│   │   └── index.css                  # Global styles
-│   ├── package.json
-│   └── vite.config.js
+│   │   ├── components/         # Reusable UI components
+│   │   ├── pages/              # Page components (Dashboard, Inventory, etc.)
+│   │   ├── context/            # React Context for state management
+│   │   ├── hooks/              # Custom React hooks
+│   │   ├── styles/             # CSS stylesheets
+│   │   └── utils/              # Utility functions
+│   ├── public/                 # Static assets
+│   └── package.json
 │
-├── Dataset/                           # Sample data
-├── start-all.ps1                      # Start all services
-└── README.md
+├── Backend/
+│   ├── server/                 # Node.js Express backend
+│   │   ├── models/             # Mongoose schemas
+│   │   ├── routes/             # API route handlers
+│   │   ├── middleware/         # Authentication, validation
+│   │   ├── services/           # Business logic
+│   │   ├── config/             # Configuration files
+│   │   └── server.js           # Main server file
+│   │
+│   ├── code/                   # Python ML backend
+│   │   └── app.py              # Flask ML API
+│   │
+│   └── supplier_intelligence/  # Supplier risk assessment
+│       ├── models/             # Trained ML models (.pkl files)
+│       ├── train_*.py          # Model training scripts
+│       └── risk_score_engine.py
+│
+├── Dataset/                    # CSV data files
+├── Models/                     # Pre-trained ML models
+├── requirements.txt            # Python dependencies
+├── package.json                # Root package.json
+└── README.md                   # This file
 ```
 
 ---
 
-## 📡 API Documentation
+## 🔑 Key Modules
 
-### Authentication
+### 1. Dashboard
+- Real-time KPI tracking
+- Sales trend visualization
+- Active network alerts
+- Depot-wise performance metrics
 
-#### Register User
-```http
-POST /api/auth/register
-Content-Type: application/json
+### 2. Inventory Overview
+- Complete product catalog
+- AI-driven risk indicators
+- Stock-out predictions
+- Reorder recommendations
+- Bulk CSV upload
 
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securepassword"
-}
+### 3. Depot Management
+- Multi-location inventory tracking
+- Depot-specific stock levels
+- Inter-depot transfers
+- Capacity monitoring
+
+### 4. Forecasting Analysis / Supplier Risk Radar
+- ML-based supplier risk scoring
+- Delay, quality, and fulfillment metrics
+- Historical performance trends
+- AI-generated corrective action plans
+
+### 5. Movement Transactions
+- Complete audit trail
+- Stock-in/Stock-out tracking
+- Transfer history
+- User activity logs
+
+### 6. Reports
+- Customizable date ranges
+- Export to PDF, Excel, CSV
+- Inventory snapshots
+- Performance analytics
+
+---
+
+## 🌐 API Documentation
+
+### Node.js Backend Endpoints
+
+#### Authentication
+```
+POST   /api/auth/signup          # User registration
+POST   /api/auth/login           # User login
+POST   /api/auth/forgot-password # Password reset
+POST   /api/auth/verify-otp      # OTP verification
 ```
 
-#### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "securepassword"
-}
+#### Products
+```
+GET    /api/products             # Get all products
+GET    /api/products/:id         # Get product by ID
+POST   /api/products             # Create new product
+PUT    /api/products/:id         # Update product
+DELETE /api/products/:id         # Delete product
+POST   /api/products/bulk-upload # CSV bulk upload
 ```
 
-### Products
-
-#### Get All Products
-```http
-GET /api/products
-Authorization: Bearer <token>
+#### Depots
+```
+GET    /api/depots               # Get all depots
+GET    /api/depots/:id           # Get depot details
+POST   /api/depots               # Create depot
+PUT    /api/depots/:id           # Update depot
 ```
 
-#### Create Product
-```http
-POST /api/products
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "name": "Product Name",
-  "category": "Electronics",
-  "stock": 100,
-  "reorderPoint": 20,
-  "supplier": "Supplier Name",
-  "price": 99.99
-}
+#### Transactions
+```
+GET    /api/transactions         # Get all transactions
+POST   /api/transactions         # Create transaction
+GET    /api/transactions/depot/:id # Get depot transactions
 ```
 
-#### Bulk Upload via CSV
-```http
-POST /api/products/bulk-upload
-Authorization: Bearer <token>
-Content-Type: multipart/form-data
-
-file: products.csv
+#### Alerts
+```
+GET    /api/alerts               # Get all alerts
+POST   /api/alerts               # Create alert
+PUT    /api/alerts/:id           # Mark as read
 ```
 
-### Transactions
+### Python ML API Endpoints
 
-#### Stock In
-```http
-POST /api/transactions/stock-in
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "productId": "product-id",
-  "depotId": "depot-id",
-  "quantity": 50,
-  "reason": "Purchase Order"
-}
+#### Forecasting
+```
+GET    /api/health               # Health check
+GET    /api/ml/products          # Get available products
+POST   /api/ml/predict/custom    # Generate forecast
+POST   /api/ml/scenario-planning # What-if analysis
 ```
 
-#### Stock Out
-```http
-POST /api/transactions/stock-out
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "productId": "product-id",
-  "depotId": "depot-id",
-  "quantity": 20,
-  "reason": "Sale"
-}
+#### Supplier Risk
 ```
-
-#### Transfer Between Depots
-```http
-POST /api/transactions/transfer
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "productId": "product-id",
-  "fromDepotId": "depot-1-id",
-  "toDepotId": "depot-2-id",
-  "quantity": 30,
-  "reason": "Rebalancing"
-}
-```
-
-### Forecasting (Python AI Service)
-
-#### Generate Forecast
-```http
-POST /api/ml/predict/custom
-Content-Type: application/json
-
-{
-  "sku": "PROD-001",
-  "productName": "Product Name",
-  "userId": "user-id",
-  "currentStock": 100,
-  "dailySales": 5,
-  "weeklySales": 35,
-  "reorderLevel": 20,
-  "leadTime": 7,
-  "forecastDays": 30
-}
-```
-
-### Supplier Risk
-
-#### Predict Supplier Risk
-```http
-POST /api/supplier/predict-risk
-Content-Type: application/json
-
-{
-  "supplier": "Supplier Name",
-  "category": "Electronics",
-  "qty": 100,
-  "price": 50
-}
+GET    /api/supplier/risk-overview      # Get all suppliers with risk scores
+POST   /api/supplier/predict-risk       # Predict risk for new order
+GET    /api/supplier/history/:name      # Get supplier history
 ```
 
 ---
 
-## 🤖 ML Models
+## 🔐 Environment Variables
 
-### 1. Stock Status Prediction (XGBoost)
-- **Purpose**: Classify stock levels (In Stock, Low Stock, Out of Stock, Overstock)
-- **Features**: Current stock, daily sales, weekly sales, reorder level, lead time, brand, category, location
-- **Model**: XGBoost Classifier
-- **Location**: `Backend/code/Models/ml_stock_priority_model.json`
+### Required Variables
 
-### 2. Demand Forecasting (ARIMA)
-- **Purpose**: Predict future sales for next 30 days
-- **Method**: ARIMA (AutoRegressive Integrated Moving Average)
-- **Features**: Historical sales patterns, seasonality, trend
-- **Fallback**: Exponential smoothing if ARIMA fails
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `MONGODB_URI` | MongoDB connection string | `mongodb+srv://user:pass@cluster.mongodb.net/db` |
+| `JWT_SECRET` | Secret key for JWT tokens | `your_secret_key_here` |
+| `NODE_PORT` | Node.js server port | `3000` |
+| `PYTHON_PORT` | Python ML API port | `5001` |
 
-### 3. Supplier Risk Scoring
-- **Purpose**: Assess supplier reliability
-- **Models**: 
-  - Delay Risk Predictor
-  - Fulfillment Risk Predictor
-  - Quality Risk Predictor
-- **Location**: `Backend/supplier_intelligence/models/`
+### Optional Variables
 
----
-
-## 🎯 Workflow
-
-### 1. User Registration & Login
-1. User registers with email and password
-2. System creates user account and default depots
-3. User logs in and receives JWT token
-4. Token is stored in localStorage for subsequent requests
-
-### 2. Product Management
-1. Add products manually or via CSV upload
-2. Products are automatically assigned to depots
-3. SKUs are auto-generated if not provided
-4. Product images can be uploaded
-
-### 3. Stock Transactions
-1. Select product from inventory
-2. Choose transaction type (Stock In, Stock Out, Transfer)
-3. Select depot(s) and enter quantity
-4. System updates:
-   - Product stock levels
-   - Depot inventory
-   - Transaction history
-   - Alerts if stock is low
-
-### 4. Demand Forecasting
-1. Navigate to Forecasting page
-2. Select product
-3. System fetches product data
-4. Python AI service generates 30-day forecast using ARIMA
-5. Results displayed with:
-   - Predicted daily demand
-   - Stock-out date prediction
-   - Reorder recommendations
-   - Confidence intervals
-
-### 5. Supplier Risk Analysis
-1. Navigate to Supplier Risk page
-2. View all suppliers with risk scores
-3. Click on supplier for detailed analysis
-4. System shows:
-   - Risk score (0-100)
-   - Historical performance
-   - Delay trends
-   - Quality metrics
-
-### 6. Reports & Analytics
-1. Navigate to Reports page
-2. Select report type (Inventory, Transactions, Forecasts)
-3. Choose date range and filters
-4. Generate report in PDF or Excel format
-5. Download or email report
-
----
-
-## 🔐 Security Features
-
-- **JWT Authentication**: Secure token-based authentication
-- **Password Hashing**: bcrypt for password encryption
-- **CORS Protection**: Configured CORS policies
-- **Rate Limiting**: API rate limiting to prevent abuse
-- **Input Validation**: Joi schema validation
-- **Environment Variables**: Sensitive data in .env files
-- **Helmet.js**: Security headers
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `EMAIL_USER` | SMTP email address | - |
+| `EMAIL_PASS` | SMTP password | - |
+| `REDIS_URL` | Redis connection URL | - |
 
 ---
 
 ## 🐛 Troubleshooting
 
-### MongoDB Connection Issues
+### Issue: Frontend can't connect to backend
+
+**Solution**: Ensure both Node.js and Python backends are running. Check CORS settings in `app.py` and `server.js`.
+
+### Issue: Risk Radar showing 0 scores
+
+**Solution**: Train the ML models first:
 ```bash
-# Check MongoDB URI in .env
-# Ensure IP is whitelisted in MongoDB Atlas
-# Verify network connectivity
+cd Backend/supplier_intelligence
+python train_all_models.py
 ```
 
-### Python Service Not Starting
+### Issue: MongoDB connection error
+
+**Solution**: 
+1. Check your `MONGODB_URI` in `.env`
+2. Ensure your IP is whitelisted in MongoDB Atlas
+3. Verify network connectivity
+
+### Issue: Models not loading
+
+**Solution**: Ensure the `models/` directory exists in `Backend/supplier_intelligence/` and contains the three `.pkl` files.
+
+### Issue: Port already in use
+
+**Solution**: 
 ```bash
-# Check Python version
-python --version  # Should be 3.9+
-
-# Reinstall dependencies
-pip install -r requirements.txt --upgrade
-
-# Check port 5001 is not in use
+# Windows
 netstat -ano | findstr :5001
-```
+taskkill /PID <PID> /F
 
-### Frontend Build Errors
-```bash
-# Clear node_modules and reinstall
-rm -rf node_modules package-lock.json
-npm install
-
-# Clear Vite cache
-npm run dev -- --force
+# Linux/Mac
+lsof -ti:5001 | xargs kill -9
 ```
 
 ---
 
-## 📝 License
-
-This project is licensed under the ISC License.
-
----
-
-## 👥 Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -677,21 +445,37 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📧 Contact
+## 📄 License
 
-For questions or support, please contact:
-- **Email**: your-email@example.com
-- **GitHub**: [@yourusername](https://github.com/yourusername)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👥 Authors
+
+- **Parth Shewale** - [@ShewaleParth](https://github.com/ShewaleParth)
 
 ---
 
 ## 🙏 Acknowledgments
 
-- MongoDB Atlas for database hosting
-- Upstash for Redis services
-- Groq for AI API
+- MongoDB Atlas for cloud database hosting
+- React and Vite teams for excellent frontend tools
+- Scikit-learn and XGBoost communities for ML libraries
 - All open-source contributors
 
 ---
 
-**Made with ❤️ by Your Team**
+## 📞 Support
+
+For support, email your_email@example.com or open an issue in the GitHub repository.
+
+---
+
+<div align="center">
+
+**Made with ❤️ for efficient logistics management**
+
+[⬆ Back to Top](#-sangrahak---ai-powered-logistics--inventory-management-system)
+
+</div>
